@@ -10,7 +10,7 @@ def inicio(): #caracteristica
     #parte 1 extracción: extrae los datos de el pdf
     import pdfplumber
 
-    with pdfplumber.open("archivo:") as pdf:
+    with pdfplumber.open("archivo") as pdf:
         primera_pagina = pdf.pages[0] # escoge las paginas
         texto = primera_pagina.extract_text() #IDENTIFICA, SEPARA Y GUARDA EN UNA LISTA LA INFO, pero guarda todo 
         #print(texto)# en una lista de una columna letra por letra
