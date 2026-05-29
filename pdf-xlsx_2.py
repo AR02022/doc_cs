@@ -1,10 +1,11 @@
 #parte 0
-from fastapi import FastAPI #libreria crwadora de web para guaradar info de api
+from fastapi import FastAPI, UploadFile   #libreria crwadora de web para guaradar info de api
 
 app = FastAPI() # objeto
 
 @app.get("/") # es para generar url para para web donde se guarda api, SE PONE ARRIBA DELA FUNCION QUE QUIERES QUE CORRA
-
+@app.post("/leer_pdf")
+async def leer_pdf(archivo: UploadFile):
 def inicio(archivo): #caracteristica
 
     #parte 1 extracción: extrae los datos de el pdf
