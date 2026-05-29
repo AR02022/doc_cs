@@ -5,7 +5,7 @@ app = FastAPI() # objeto
 
 @app.get("/") # es para generar url para para web donde se guarda api, SE PONE ARRIBA DELA FUNCION QUE QUIERES QUE CORRA
 
-def inicio(): #caracteristica
+def inicio(archivo): #caracteristica
 
     #parte 1 extracción: extrae los datos de el pdf
     import pdfplumber
