@@ -5,12 +5,12 @@ app = FastAPI() # objeto
 
 @app.get("/") # es para generar url para para web donde se guarda api, SE PONE ARRIBA DELA FUNCION QUE QUIERES QUE CORRA
 @app.post("/leer_pdf")
-async def leer_pdf(response: UploadFile): #caracteristica
+async def leer_pdf(blob: UploadFile): #caracteristica
 
     #parte 1 extracción: extrae los datos de el pdf
     import pdfplumber
 
-    with pdfplumber.open(response) as pdf:
+    with pdfplumber.open(blob) as pdf:
         primera_pagina = pdf.pages[0] # escoge las paginas
         texto = primera_pagina.extract_text() #IDENTIFICA, SEPARA Y GUARDA EN UNA LISTA LA INFO, pero guarda todo 
         #print(texto)# en una lista de una columna letra por letra
