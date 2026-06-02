@@ -8,7 +8,12 @@ app = FastAPI() # objeto
 async def leer_pdf(blob: UploadFile): #caracteristica
 
     #parte 1 extracción: extrae los datos de el pdf
-    import pdfplumber
+import pdfplumber
+import io
+
+contenido = await blob.read()
+
+pdf_stream = io.BytesIO(contenido)
 
     with pdfplumber.open(blob) as pdf:
         primera_pagina = pdf.pages[0] # escoge las paginas
