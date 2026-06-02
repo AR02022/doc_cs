@@ -9,7 +9,7 @@ async def leer_pdf(archivo: UploadFile = File(...)):
     import pdfplumber
     import io
 
-    contenido = await blob.read()# recibe y lee el doc 
+    contenido = await archivo.read()# recibe y lee el doc 
 
     pdf_stream = io.BytesIO(contenido) # sirve para engañar a la compu y logre leer el doc y hacerle creer que el doc el local
 
