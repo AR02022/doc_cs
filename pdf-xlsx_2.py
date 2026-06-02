@@ -7,7 +7,7 @@ app = FastAPI() # objeto
 async def leer_pdf(archivo: UploadFile = File(...)):
     return {
         "mensaje": f"¡Servidor Python recibió el archivo {archivo.filename} con éxito!" 
-
+    }
     #parte 1 recibir doc de app script 
     import pdfplumber
     import io
