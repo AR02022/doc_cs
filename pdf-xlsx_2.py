@@ -1,37 +1,37 @@
-#parte 0
 from fastapi import FastAPI, UploadFile   #libreria crwadora de web para guaradar info de api
 
 app = FastAPI() # objeto
 
-@app.get("/") # es para generar url para para web donde se guarda api, SE PONE ARRIBA DELA FUNCION QUE QUIERES QUE CORRA
-@app.post("/leer_pdf")
+@app.post("/leer_pdf") # es para generar url para para web donde se guarda api, SE PONE ARRIBA DELA FUNCION QUE QUIERES QUE CORRA, se usa post para mandar info
+
 async def leer_pdf(blob: UploadFile): #caracteristica
 
-    #parte 1 extracción: extrae los datos de el pdf
-import pdfplumber
-import io
+    #parte 1 recibir doc de app script 
+    import pdfplumber
+    import io
 
-contenido = await blob.read()
+    contenido = await blob.read()# recibe y lee el doc 
 
-pdf_stream = io.BytesIO(contenido)
+    pdf_stream = io.BytesIO(contenido) # sirve para engañar a la compu y logre leer el doc y hacerle creer que el doc el local
 
-    with pdfplumber.open(blob) as pdf:
+# parte 2 organizador de palabras 
+    with pdfplumber.open(pdf_stream) as pdf: 
         primera_pagina = pdf.pages[0] # escoge las paginas
         texto = primera_pagina.extract_text() #IDENTIFICA, SEPARA Y GUARDA EN UNA LISTA LA INFO, pero guarda todo 
         #print(texto)# en una lista de una columna letra por letra
         print("paso 1 extracción concluida")
 
-    # paso 2 organizacion de datos en formato de lectura normal    
         lineas = texto.split("\n") # "\n" significa salto de linea pero todo junto "texto.split("\n")" organiza todas las palbras dentro dde una lista-
         #print(lineas)
         print("paso 2 organización completado")
 
-    #paso 3 
+    #paso 3 extraccion de datos
     lista = ["USD","Medio de Transporte:","Nombre / Razón Social:", "Producto:", "Descripción:", "Fecha de salida:","Factura", "Folio:"] 
 
-    list_new =  [] # save nuevos datos
+    list_new =  [] # lista para nuevos datos
     num = 0
     print("iniciando paso 3")
+    # codigo que sirve para extraer los datos segun la palabra mnecionada en la lista de arriba
     for palabra in lista: # sirve para reiniciar el codigo y volver a leer todo, pero necesita que el "break" este dentro del if, para que reinicie cada vez que encuentra la respuesta
         
         for i in range(len(lineas)): # #"Range" sirve para contar desde "0", "len" sirve para contar el numero de elementos que hay dentro de la base de datos. juntos cuenta los umeros de la lista desde el "0"
@@ -116,14 +116,10 @@ pdf_stream = io.BytesIO(contenido)
             else:
                 print("no se encontro la informacion",i)
         print("proceso 3 completado")
-
-    #return lineas
+    #paso 4 
+    #retorno de nueva informacion
     return list_new        
    
 
     #para iniciar code          
     #uvicorn pdf-xlsx_2:app --reload  
-        
-
-        #ES HORA DE EMPEZAR A HACER PRUEBAS CON LA HOJA DE CALCULO, 
-    # EN CUANTO TENGAS LUZ VERDE, TIENES QUE AGREGAR TODAS LAS PALBARAS CLAVES.
