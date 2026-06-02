@@ -4,7 +4,9 @@ app = FastAPI() # objeto
 
 @app.post("/leer_pdf") # es para generar url para para web donde se guarda api, SE PONE ARRIBA DELA FUNCION QUE QUIERES QUE CORRA, se usa post para mandar info
 
-async def leer_pdf(blob: UploadFile): #caracteristica
+async def leer_pdf(archivo: UploadFile = File(...)):
+    return {
+        "mensaje": f"¡Servidor Python recibió el archivo {archivo.filename} con éxito!" 
 
     #parte 1 recibir doc de app script 
     import pdfplumber
