@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile   #libreria crwadora de web para guaradar info de api
+from fastapi import FastAPI, UploadFile, File   #libreria crwadora de web para guaradar info de api
 
 app = FastAPI() # objeto
 
